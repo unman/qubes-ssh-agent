@@ -1,0 +1,6 @@
+## Note that policy parsing stops at the first match.
+
+## Please use a single # to start your custom comments.
+
+client	@dispvm ask,target=ssh-agent
+@anyvm	@anyvm	deny
