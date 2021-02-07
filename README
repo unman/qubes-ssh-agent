@@ -7,3 +7,15 @@ qubes will be restricted to particular keys.
 Specification also required a solution that contained no information in
 the client, and all interaction is to be controlled in dom0 by the
 policy file.
+
+ssh-agent:
+Standard set-up for multiple agents, configured by systemd user.
+
+dom0:
+Standard policy file:
+qubes.SshAgent -
+client @anyvm ask,target=tester
+
+client:
+socat to take over ssh-agent socket, and forward call via qrexec.
+`socat -v UNIX-LISTEN:$SSH_AUTH_SOCK,unlink-early EXEC:"qrexec-client-vm @dispvm qubes.SshAgent"`
