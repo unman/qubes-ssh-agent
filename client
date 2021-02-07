@@ -1,0 +1,1 @@
+socat -v UNIX-LISTEN:$SSH_AUTH_SOCK,unlink-early EXEC:"qrexec-client-vm @dispvm qubes.SshAgent
