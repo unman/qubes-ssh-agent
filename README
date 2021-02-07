@@ -1,0 +1,9 @@
+This is an alternative approach to the existing split-ssh. 
+I didnt want an approach that loaded all of ssh-agent in to every
+client qube.
+I have many keypairs, and they will be accessed from different qubes.
+So although the ssh-agent qube will hold all the keyapirs, individual
+qubes will be restricted to particular keys.
+Specification also required a solution that contained no information in
+the client, and all interaction is to be controlled in dom0 by the
+policy file.
