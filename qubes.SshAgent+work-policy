@@ -2,4 +2,5 @@
 
 ## Please use a single # to start your custom comments.
 
+client	@anyvm ask,target=ssh-agent
 @anyvm	@anyvm	deny
