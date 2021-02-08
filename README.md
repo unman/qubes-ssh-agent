@@ -37,7 +37,7 @@ The agent can be controlled by setting the environment:
 `export SSH_AUTH_SOCK="/run/user/1000/ssh-work.socket"`  
 Then use standard tools, `ssh-add`
 
-Keys can be selectively added to different agents.
+Keys can be selectively allocated to different ssh-agents.
 
 A qubes-rpc agent is added that directs incoming qrexec calls to the right ssh-agent.
 
@@ -49,4 +49,29 @@ This is put in place in `~/.bashrc`
 ## Policies in dom0:
 Standard policy rules are used to direct the qrexec call to the ssh-agent qube.
 These rules also ensure that client qubes can only access authorized ssh-agents.
+
+
+## Installation
+### On the ssh-agent qube
+1. Move your keypairs to the offline ssh-agent qube.  
+2. Create a user-agent as described above.
+3. Copy the `qubes.SshAgent` file to `/etc/qubes-rpc`
+
+### On the client
+4. Edit the contents of `client` to match the name of the ssh-agent you are targeting. 
+5. Add the contents of `client` to `~/.bashrc`
+
+### In dom0
+6. Copy `qubes.SshAgent-policy` to `/etc/qubes-rpc/policy/qubes.SshAgent`
+7. Copy `qubes.SshAgent+work-policy` to `/etc/qubes-rpc/policy/qubes.SshAgent+work`
+8. Change the name of that policy file to match the ssh-agent you are targeting.
+9. Edit that policy file so that the target matches the name of the ssh-agent qube you want to use.
+
+Notice that by default, the policy file uses *ask*.
+This means that you will be prompted each time an application attempts to access the ssh-agent.
+You may want to change this to *allow* at some cost to security.
+
+For exceptionally valuable keys you may want to limit the time that they are available.
+You can do this by using `ssh-add -t <secs> ...` when you add the key to the agent.
+After <secs> seconds, the key will be removed from the agent.
 
