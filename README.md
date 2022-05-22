@@ -48,7 +48,25 @@ This is put in place in `~/.bashrc`
 
 ## Policies in dom0:
 Standard policy rules are used to direct the qrexec call to the ssh-agent qube.
-These rules also ensure that client qubes can only access authorized ssh-agents.
+These rules also ensure that client qubes can only access authorized ssh-agents.  
+E.g - in `/etc/qubes/policy.d/30-user.policy`  
+```
+qubes.SshAgent work  work  @anyvm ask default_target sys-ssh-agent
+qubes.SshAgent  *    @anyvm  @anyvm deny
+
+```
+
+These rules ensure that the work qube will be able to access the work ssh-Agent, and no other qube can.  
+You can have multiple agents defined, and also more than one server:  
+
+```
+qubes.SshAgent work       work      @anyvm ask default_target sys-ssh-agent
+qubes.SshAgent untrusted  untrusted @anyvm ask default_target sys-ssh-agent
+qubes.SshAgent personal   personal  @anyvm ask default_target sys-ssh-agent
+qubes.SshAgent work       qubes     @anyvm ask default_target sys-ssh-agent2
+qubes.SshAgent  *         @anyvm    @anyvm deny
+
+```
 
 
 ## Installation

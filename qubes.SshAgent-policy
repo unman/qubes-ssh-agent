@@ -1,5 +1,0 @@
-## Note that policy parsing stops at the first match.
-
-## Please use a single # to start your custom comments.
-
-@anyvm	@anyvm	deny
