@@ -35,3 +35,23 @@ create_qrexec:
   file.append:
     - text: binds+=( '/etc/qubes-rpc/qubes.SshAgent' )  
     - makedirs: True
+
+/home/user/keys:
+  file.directory:
+    - user: user
+    - group: user
+
+/home/user/work-agent.sh
+  file.managed:
+    - source: salt://qubes-ssh-agent/work-agent.sh
+    - user: user
+    - group: user
+    - mode: 755
+    - makedirs: True
+
+/home/user/Configure-new-ssh-agent.sh
+  file.managed:
+    - source: salt://qubes-ssh-agent/Configure-new-ssh-agent.sh
+    - user: user
+    - group: user
+    - mode: 755
