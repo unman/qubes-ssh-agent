@@ -2,7 +2,7 @@
 
 /home/user/.local/share/systemd/user/ssh-work.service:
   file.managed:
-    - source: qubes-ssh-agent/agent_unit
+    - source: salt://qubes-ssh-agent/agent_unit
     - user: user
     - group: user
     - makedirs: True
