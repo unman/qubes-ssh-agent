@@ -1,0 +1,11 @@
+[Unit]
+Description=SSH agent for work
+Before=default.target
+
+[Service]
+Type=forking
+Environment=SSH_AUTH_SOCK=%t/ssh-work.socket
+ExecStart=/usr/bin/ssh-agent -a $SSH_AUTH_SOCK
+
+[Install]
+WantedBy=default.target
