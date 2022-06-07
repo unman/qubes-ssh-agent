@@ -41,7 +41,7 @@ create_qrexec:
     - user: user
     - group: user
 
-/home/user/work-agent.sh
+/home/user/work-agent.sh:
   file.managed:
     - source: salt://qubes-ssh-agent/work-agent.sh
     - user: user
@@ -49,7 +49,7 @@ create_qrexec:
     - mode: 755
     - makedirs: True
 
-/home/user/Configure-new-ssh-agent.sh
+/home/user/Configure-new-ssh-agent.sh:
   file.managed:
     - source: salt://qubes-ssh-agent/Configure-new-ssh-agent.sh
     - user: user
