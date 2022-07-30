@@ -1,9 +1,8 @@
-include:
-  - template-debian-11
+ssh_precursor:
+  - qvm.template_installed:
+    - name: template-debian-11-minimal
 
 qvm-clone-id:
   qvm.clone:
-    - require:
-      - sls: template-debian-11
     - name: template-ssh-agent
     - source: debian-11
