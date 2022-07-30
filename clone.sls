@@ -1,8 +1,8 @@
-clone_precursor:
-  qvm.template_installed:
+ssh_precursor:
+  - qvm.template_installed:
     - name: debian-11
 
-qvm-clone-id:
+qvm-ssh-id:
   qvm.clone:
-    - require:
+    - name: template-ssh-agent
     - source: debian-11
