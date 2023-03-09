@@ -1,5 +1,5 @@
 ssh_precursor:
-  - qvm.template_installed:
+  qvm.template_installed:
     - name: debian-11
 
 qvm-ssh-id:
