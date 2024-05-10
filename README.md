@@ -2,10 +2,13 @@
 This is an alternative approach to the existing [qubes split-ssh](https://github.com/henn/qubes-app-split-ssh).  
 It is ideal for use cases where you have a number of key pairs, which are used by different qubes.
 
+The ssh-agent server is based on a clone of the debian-12-minimal template, and is offline.
+You may choose to additionally change security settings for file copy or clipboard access by editing the relevant policies.
+
 The keypairs are stored on the offline ssh-agent server, and requests are passed from clients to the server via qrexec.  
 Clients may access the same ssh-agent, or access different agents.  
 Access is controlled via dom0 policy files, as usual.  
-The client does not know the identity of the ssh-agent server, nor are keys kept in memory in the client.
+The client need not know the identity of the ssh-agent server, nor are keys kept in memory in the client.
 
 All configuration of keys, and unlocking of keys, where they are password protected, is done in the ssh-agent server, using standard ssh-agent controls.
 
@@ -49,7 +52,7 @@ This is put in place in `~/.bashrc`
 ## Policies in dom0:
 Standard policy rules are used to direct the qrexec call to the ssh-agent qube.
 These rules also ensure that client qubes can only access authorized ssh-agents.  
-E.g - in `/etc/qubes/policy.d/30-user.policy`  
+E.g - in `/etc/qubes/policy.d/50-config-splitssh.policy`
 ```
 qubes.SshAgent work  work  @anyvm ask default_target sys-ssh-agent
 qubes.SshAgent  *    @anyvm  @anyvm deny
@@ -71,7 +74,7 @@ qubes.SshAgent  *         @anyvm    @anyvm deny
 
 ## Installation
 ### On the ssh-agent qube
-1. Move your keypairs to the offline ssh-agent qube.  
+1. Move your keypairs to the offline ssh-agent qube in `~/keys`.  
 2. Create a user-agent as described above.
 3. Copy the `qubes.SshAgent` file to `/etc/qubes-rpc`
 

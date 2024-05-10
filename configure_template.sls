@@ -1,5 +1,11 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
+ssh_install:
+  pkg.installed:
+    - pkgs:
+      - openssh-client
+      - socat
+
 /skel/.local/share/systemd/user/ssh-work.service:
   file.managed:
     - source: salt://qubes-ssh-agent/agent_unit
@@ -10,7 +16,7 @@
 loginctl enable-linger user:
   cmd.run
 
-create_qrexec:
+create_ssh_qrexec:
   file.managed:
     - name: /rw/bind-dirs/etc/qubes-rpc/qubes.SshAgent
     - mode: 775

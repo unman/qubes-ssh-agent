@@ -1,13 +1,13 @@
 include:
   - qubes-ssh-agent.clone
 
-qvm-present-id:
+qvm-ssh-present-id:
   qvm.present:
     - name: sys-ssh-agent
     - template: template-ssh-agent
     - label: gray
 
-qvm-prefs-id:
+qvm-ssh-prefs-id:
   qvm.prefs:
     - name: sys-ssh-agent
     - netvm: none
@@ -16,7 +16,7 @@ qvm-prefs-id:
     - vcpus: 2
     - provides-network: False
 
-qvm-features-id:
+qvm-ssh-features-id:
   qvm.features:
     - name: sys-ssh-agent
     - ipv6: ''
@@ -27,7 +27,7 @@ qvm-features-id:
 
 update_file:
   file.prepend:
-    - name: /etc/qubes/policy.d/30-user.policy
+    - name: /etc/qubes/policy.d/50-config-splitssh.policy 
     - text: |
         qubes.SshAgent  +work  @anyvm  @anyvm ask default_target=sys-ssh-agent
         qubes.SshAgent  *      @anyvm  @anyvm deny
